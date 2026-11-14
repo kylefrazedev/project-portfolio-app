@@ -1,67 +1,38 @@
 <script lang="ts">
-	import Resume from '$lib/contacts/resume.pdf';
-	import { onMount } from 'svelte';
+	import PdfViewer from '#lib/components/PdfViewer.svelte';
+	import { site } from '#lib/data/site.ts';
 
-	let PdfViewer: any;
-	onMount(async () => {
-		const module = await import('svelte-pdf');
-		PdfViewer = module.default;
-	});
+	const links = [
+		{ label: site.phone, href: `tel:${site.phone.replace(/\D/g, '')}`, icon: '📞' },
+		{ label: site.email, href: `mailto:${site.email}`, icon: '📨' },
+		{ label: 'GitHub', href: site.github, icon: '💾' },
+		{ label: 'LinkedIn', href: site.linkedin, icon: '🔗' }
+	];
 </script>
 
-<main class="pt-16">
-	<div class="py-8">
-		<div class="container mx-auto text-center drop-shadow-lg">
-			<div class="bg-surface-600 bg-opacity-50 rounded-lg inline-block p-4">
-				<h1 class="h1">
-					<span
-						class="bg-gradient-to-br from-pink-500 to-violet-500 bg-clip-text text-transparent box-decoration-clone"
-						>Contacts.</span
-					>
-				</h1>
-				<div class="mt-4 text-secondary-100">
-					<div class="rounded-lg mx-20">
-						<!-- Add this div for the small box -->
-						<p>Feel free to contact me if you want</p>
-                        <p>to discuss any of my projects.</p>
-					</div>
-				</div>
-				<div class="mt-8">
-					<p class="text-lg">Frazier E. Kyle 👋</p>
-					<p class="text-lg">
-						<a href="tel:(513)-882-6736" class="text-blue-300 hover:underline">(513)-882-6736 📞</a>
-					</p>
-					<p class="text-lg">
-						<a href="mailto:frazierkyle1235@gmail.com" class="text-blue-300 hover:underline"
-							>frazierkyle1235@gmail.com 📨</a
-						>
-					</p>
-					<p class="text-lg">
-						<a href="https://github.com/BigNinjaChicken" class="text-blue-300 hover:underline"
-							>GitHub Link 💾</a
-						>
-					</p>
-                    <p class="text-lg">
-						<a href="https://www.linkedin.com/in/frazierkyle/" class="text-blue-300 hover:underline target:shadow-lg"
-							>LinkedIn 🔗</a
-						>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<svelte:head>
+	<title>Contact & Resume — Frazier Kyle</title>
+</svelte:head>
 
-	<div class="py-4">
-        <div class="container mx-auto text-center drop-shadow-lg">
-            <a href={Resume} target="_blank" type="button" class="btn variant-filled drop-shadow-lg">
-                <p class="mx-10 p-3 text-2xl">Resume</p>
-            </a>
-    
-            <!-- Hide PDF viewer on small screens (e.g., screens smaller than md) -->
-            <div class="mt-4 hidden md:block">
-                <svelte:component this={PdfViewer} url={Resume} />
-            </div>
-        </div>
-    </div>
-    
-</main>
+<div class="px-4 pt-28 sm:px-6">
+	<section class="mx-auto max-w-xl rounded-2xl border border-border bg-surface p-8 text-center">
+		<h1 class="text-gradient text-5xl font-bold">Contact</h1>
+		<p class="mt-4 text-muted">
+			Feel free to reach out if you'd like to discuss any of my projects.
+		</p>
+		<p class="mt-8 text-lg font-medium">Frazier E. Kyle 👋</p>
+		<ul class="mt-4 space-y-2 text-lg">
+			{#each links as link (link.href)}
+				<li>
+					<a href={link.href} class="text-accent hover:underline">
+						{link.label} <span aria-hidden="true">{link.icon}</span>
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</section>
+</div>
+
+<section class="mt-16" aria-label="Resume">
+	<PdfViewer src={site.resume} title="Resume" />
+</section>

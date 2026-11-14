@@ -1,0 +1,26 @@
+{
+	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"redirects": [
+		{
+			"source": "/portfolio/feature-1",
+			"destination": "/portfolio/rounds-on-me",
+			"permanent": true
+		},
+		{
+			"source": "/portfolio/feature-2",
+			"destination": "/portfolio/express-polar",
+			"permanent": true
+		},
+		{
+			"source": "/portfolio/feature-3",
+			"destination": "/portfolio/pursuit-of-laughter",
+			"permanent": true
+		},
+		{ "source": "/portfolio/feature-4", "destination": "/portfolio/xr-opening", "permanent": true },
+		{
+			"source": "/portfolio/feature-5",
+			"destination": "/portfolio/progress-book",
+			"permanent": true
+		}
+	]
+}

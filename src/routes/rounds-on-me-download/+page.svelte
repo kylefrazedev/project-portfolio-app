@@ -1,22 +1,21 @@
-<script>
-	const filePath = '/Windows1.4.zip';
+<script lang="ts">
+	// The game build used to be self-hosted here (/Windows1.4.zip) but that file was never
+	// committed, so downloads now go through the itch.io page.
+	const itch = 'https://bigninjachicken.itch.io/rounds-on-me';
 </script>
 
-<main class="pt-16">
-    <div class="flex justify-center items-center min-h-screen">
-        <div class="container mx-auto p-10">
-            <h1 class="text-white text-5xl tracking-small text-center mb-4" id="recent-projects">
-                <span
-                    class="bg-gradient-to-br from-blue-500 to-cyan-300 bg-clip-text text-transparent box-decoration-clone"
-                    >Rounds On Me</span
-                >
-            </h1>
-            <!-- Moved the download button inside the container and directly below the text -->
-            <div class="text-center">
-                <a href={filePath} download="Windows1.4.zip" class="btn bg-gradient-to-br variant-gradient-secondary-tertiary p-7">
-                    Download Game!
-                </a>
-            </div>
-        </div>
-    </div>
-</main>
+<svelte:head>
+	<title>Download Rounds On Me — Frazier Kyle</title>
+</svelte:head>
+
+<div class="grid min-h-[70svh] place-items-center px-4 pt-28 text-center">
+	<div>
+		<h1 class="text-gradient text-5xl font-bold">Rounds On Me</h1>
+		<a href={itch} class="mt-8 btn btn-primary px-10 py-5 text-lg" rel="noopener">
+			Download on itch.io ↗
+		</a>
+		<p class="mt-6">
+			<a href="/portfolio/rounds-on-me" class="text-accent hover:underline">About the game</a>
+		</p>
+	</div>
+</div>
