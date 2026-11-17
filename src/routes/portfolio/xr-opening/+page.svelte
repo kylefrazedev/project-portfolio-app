@@ -53,7 +53,7 @@
 					class="w-full rounded-xl"
 				/>
 				<figure>
-					<enhanced:img src="#lib/assets/projects/xr-opening/xr5.png" alt="" class="rounded-xl" />
+					<enhanced:img src="#lib/assets/projects/xr-opening/xr5.jpg" alt="" class="rounded-xl" />
 					<figcaption class="mt-2 text-center text-sm text-muted italic">
 						The in-camera set extension I helped bring to life.
 					</figcaption>

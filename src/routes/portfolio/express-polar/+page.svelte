@@ -30,7 +30,7 @@
 			technical challenges, and design decisions that brought it to life.
 		</p>
 		{#snippet media()}
-			<enhanced:img src="#lib/assets/projects/express-polar/cover.png" alt="" class="rounded-xl" />
+			<enhanced:img src="#lib/assets/projects/express-polar/cover.jpg" alt="" class="rounded-xl" />
 		{/snippet}
 	</Section>
 
@@ -61,7 +61,7 @@
 		</p>
 		{#snippet media()}
 			<enhanced:img
-				src="#lib/assets/projects/express-polar/train-1.png"
+				src="#lib/assets/projects/express-polar/train-1.jpg"
 				alt=""
 				class="rounded-xl"
 			/>
@@ -91,7 +91,7 @@
 		</p>
 		{#snippet media()}
 			<enhanced:img
-				src="#lib/assets/projects/express-polar/train-2.png"
+				src="#lib/assets/projects/express-polar/train-2.jpg"
 				alt=""
 				class="rounded-xl"
 			/>

@@ -56,7 +56,7 @@
 			particularly for newcomers.
 		</p>
 		{#snippet media()}
-			<enhanced:img src="#lib/assets/projects/rounds-on-me/image-1.png" alt="" class="rounded-xl" />
+			<enhanced:img src="#lib/assets/projects/rounds-on-me/image-1.jpg" alt="" class="rounded-xl" />
 		{/snippet}
 	</Section>
 
@@ -73,7 +73,7 @@
 			boost, while the chooser enjoyed some mischievous camaraderie among friends.
 		</p>
 		{#snippet media()}
-			<enhanced:img src="#lib/assets/projects/rounds-on-me/image-2.png" alt="" class="rounded-xl" />
+			<enhanced:img src="#lib/assets/projects/rounds-on-me/image-2.jpg" alt="" class="rounded-xl" />
 		{/snippet}
 	</Section>
 
@@ -102,7 +102,7 @@
 			based on the scoreboard. Every player now works on several stories in a single game.
 		</p>
 		{#snippet media()}
-			<enhanced:img src="#lib/assets/projects/rounds-on-me/image-5.png" alt="" class="rounded-xl" />
+			<enhanced:img src="#lib/assets/projects/rounds-on-me/image-5.jpg" alt="" class="rounded-xl" />
 		{/snippet}
 	</Section>
 
@@ -115,7 +115,7 @@
 			the highest-scoring story — incorporating a bit of everyone's input.
 		</p>
 		{#snippet media()}
-			<enhanced:img src="#lib/assets/projects/rounds-on-me/image-3.png" alt="" class="rounded-xl" />
+			<enhanced:img src="#lib/assets/projects/rounds-on-me/image-3.jpg" alt="" class="rounded-xl" />
 		{/snippet}
 	</Section>
 </CaseStudy>

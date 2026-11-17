@@ -6,7 +6,7 @@
 	import { featuredProjects } from '#lib/data/projects.ts';
 
 	import hero1 from '#lib/assets/hero/stat-gpt.jpg?enhanced';
-	import hero2 from '#lib/assets/hero/action-slapstick.png?enhanced';
+	import hero2 from '#lib/assets/hero/action-slapstick.jpg?enhanced';
 	import hero3 from '#lib/assets/hero/dino.jpg?enhanced';
 	import nitric from '#lib/assets/logos/nitric-concepts.png?enhanced';
 	import nationwide from '#lib/assets/logos/nationwide.png?enhanced';
@@ -133,7 +133,7 @@
 			<a href="/contacts" class="mt-2 btn btn-primary">My resume</a>
 		</div>
 		<enhanced:img
-			src="#lib/assets/about/gdc-me.png"
+			src="#lib/assets/about/gdc-me.jpg"
 			alt="Frazier Kyle at GDC"
 			class="size-64 shrink-0 rounded-full border-4 border-primary object-cover sm:size-80"
 		/>

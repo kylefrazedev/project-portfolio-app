@@ -53,7 +53,7 @@
 		<p><em>Began as a game jam (hackathon) game and kept improving afterwards.</em></p>
 		{#snippet media()}
 			<enhanced:img
-				src="#lib/assets/projects/pursuit-of-laughter/armory-amusement.png"
+				src="#lib/assets/projects/pursuit-of-laughter/armory-amusement.jpg"
 				alt=""
 				class="rounded-xl"
 			/>
@@ -120,7 +120,7 @@
 		</p>
 		{#snippet media()}
 			<enhanced:img
-				src="#lib/assets/projects/pursuit-of-laughter/wardens.png"
+				src="#lib/assets/projects/pursuit-of-laughter/wardens.jpg"
 				alt=""
 				class="mx-auto max-h-[70vh] w-auto rounded-xl"
 			/>
