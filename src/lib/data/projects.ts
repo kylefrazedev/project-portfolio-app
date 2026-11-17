@@ -1,5 +1,6 @@
 import type { Picture } from '@sveltejs/enhanced-img';
 
+import kodanshaHouse from '#lib/assets/projects/kodansha-house/cover.jpg?enhanced';
 import progressBook from '#lib/assets/projects/progress-book.png?enhanced';
 import xrOpening from '#lib/assets/projects/xr-opening/cover.jpg?enhanced';
 import pursuitOfLaughter from '#lib/assets/projects/pursuit-of-laughter/cover.png?enhanced';
@@ -46,6 +47,19 @@ export type Project = {
 
 export const projects: Project[] = [
 	{
+		slug: 'kodansha-house',
+		title: 'Kodansha House',
+		tagline: 'Immersive Manga Experience',
+		role: 'Creative Technology Programmer',
+		date: 'July & October 2026',
+		location: 'Acronym — Los Angeles & New York',
+		description:
+			'Pop-ups for Kodansha in LA (Anime Expo) and NYC (New York Comic Con). I programmed the Blue Lock impact-screen shooting game, scoreboards and iPad UIs, the Witch Hat Atelier spell-casting experience, the Akira and Attack on Titan photo takeaways, and all show control in TouchDesigner — 10,000+ guest takeaways in New York alone.',
+		image: kodanshaHouse,
+		caseStudy: true,
+		featured: 1
+	},
+	{
 		slug: 'progress-book',
 		title: '2024 Miami University Project Book',
 		role: 'Senior Design Project',
@@ -66,7 +80,7 @@ export const projects: Project[] = [
 			'The immersive XR set I created for the live audience at the Grand Opening of the Miami University McVey Data Science Building.',
 		image: xrOpening,
 		caseStudy: true,
-		featured: 2
+		featured: 3
 	},
 	{
 		slug: 'pursuit-of-laughter',
@@ -78,7 +92,7 @@ export const projects: Project[] = [
 			'A multiplayer first-person rogue-lite about pleasing the Jester God by defeating hordes of enemies in the pursuit of laughter. Players navigate a treacherous, ever-changing world with a blend of skill, strategy, and humor.',
 		image: pursuitOfLaughter,
 		caseStudy: true,
-		featured: 3
+		featured: 4
 	},
 	{
 		slug: 'rounds-on-me',
@@ -92,7 +106,7 @@ export const projects: Project[] = [
 		image: roundsOnMe,
 		featureImage: roundsOnMeExpo,
 		caseStudy: true,
-		featured: 1
+		featured: 2
 	},
 	{
 		slug: 'portfolio-site',
