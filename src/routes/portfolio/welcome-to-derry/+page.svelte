@@ -50,6 +50,24 @@
 	next="google-io-2025"
 	{heroPanels}
 >
+	{#snippet feature()}
+		<h2 class="mb-3 text-lg font-bold text-muted">Behind the build</h2>
+		<video
+			class="w-full rounded-xl bg-surface"
+			controls
+			playsinline
+			preload="none"
+			poster="/video/welcome-to-derry-poster.jpg"
+		>
+			<source src="/video/welcome-to-derry.mp4" type="video/mp4" />
+			<track kind="captions" />
+		</video>
+		<p class="mt-3 text-muted">
+			A short documentary on how the show turned each guest's fear into a live, generated scare,
+			narrated by Lead Producer Paul Elsberg.
+		</p>
+	{/snippet}
+
 	<Lightbox class="space-y-16">
 		<Section heading="The project">
 			<p>
