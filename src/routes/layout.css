@@ -34,6 +34,67 @@
 	}
 }
 
+/* Expandable images (see Lightbox.svelte). The <picture> hugs its image so the icon sits on it. */
+[data-zoomable] picture:not(a picture) {
+	position: relative;
+	display: block;
+	width: fit-content;
+	margin-inline: auto;
+	cursor: zoom-in;
+	border-radius: var(--radius-xl);
+}
+[data-zoomable] picture:not(a picture)::after {
+	content: '';
+	position: absolute;
+	right: 0.6rem;
+	bottom: 0.6rem;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 9999px;
+	background: rgb(0 0 0 / 0.6)
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'/%3E%3C/svg%3E")
+		center / 1.1rem no-repeat;
+	opacity: 0.85;
+	transition:
+		opacity 150ms,
+		background-color 150ms;
+	pointer-events: none;
+}
+[data-zoomable] picture:not(a picture):hover::after,
+[data-zoomable] picture:not(a picture):focus-visible::after {
+	opacity: 1;
+	background-color: var(--color-primary);
+}
+
+.lightbox {
+	position: fixed;
+	inset: 0;
+	width: 100vw;
+	height: 100dvh;
+	max-width: none;
+	max-height: none;
+	margin: 0;
+	padding: 1rem;
+	overflow: hidden;
+	border: 0;
+	background: transparent;
+	place-items: center;
+	cursor: zoom-out;
+}
+.lightbox[open] {
+	display: grid;
+}
+.lightbox img {
+	cursor: default;
+}
+.lightbox::backdrop {
+	background: rgb(0 0 0 / 0.88);
+	backdrop-filter: blur(4px);
+}
+html:has(.lightbox[open]) {
+	overflow: hidden;
+}
+
 @utility text-gradient {
 	@apply bg-linear-to-br from-primary to-accent bg-clip-text text-transparent;
 }
@@ -46,4 +107,18 @@
 }
 @utility btn-ghost {
 	@apply border border-border text-fg hover:border-accent hover:text-accent;
+}
+
+/* Scroll reveal (see #lib/actions/reveal.ts). The class is only added when JS runs. */
+.reveal {
+	opacity: 0;
+	transform: translateY(1.75rem) scale(0.98);
+	transition:
+		opacity 700ms ease-out,
+		transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+	transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+	opacity: 1;
+	transform: none;
 }

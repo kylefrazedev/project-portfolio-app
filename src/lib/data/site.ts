@@ -1,3 +1,5 @@
+import { version } from '$app/env';
+
 export const site = {
 	name: 'Frazier Kyle',
 	title: "Frazier Kyle's Portfolio",
@@ -7,7 +9,8 @@ export const site = {
 	github: 'https://github.com/BigNinjaChicken',
 	linkedin: 'https://www.linkedin.com/in/frazierkyle/',
 	repo: 'https://github.com/kylefrazedev/project-portfolio-app',
-	resume: '/resume.pdf'
+	// Versioned per build so browsers never show a cached, outdated résumé.
+	resume: `/resume.pdf?v=${version}`
 };
 
 export const nav = [

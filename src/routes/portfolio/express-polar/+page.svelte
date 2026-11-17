@@ -1,11 +1,17 @@
 <script lang="ts">
 	import CaseStudy from '#lib/components/CaseStudy.svelte';
+	import heroTrain2 from '#lib/assets/projects/express-polar/train-2.jpg?enhanced';
+	import heroTrain1 from '#lib/assets/projects/express-polar/train-1.jpg?enhanced';
 	import Section from '#lib/components/Section.svelte';
 	import YouTube from '#lib/components/YouTube.svelte';
 </script>
 
 <CaseStudy
 	slug="express-polar"
+	heroPanels={[
+		{ image: heroTrain2, alt: 'Inside the generated train', focus: '55% 50%' },
+		{ image: heroTrain1, alt: 'A train car corridor', focus: '50% 50%' }
+	]}
 	subtitle="Runaway in the train."
 	specs={[
 		{ label: 'My role', value: 'Solo Developer' },

@@ -1,11 +1,17 @@
 <script lang="ts">
 	import CaseStudy from '#lib/components/CaseStudy.svelte';
+	import heroLobby from '#lib/assets/projects/rounds-on-me/image-1.jpg?enhanced';
+	import heroExpo from '#lib/assets/projects/rounds-on-me/expo.webp?enhanced';
 	import Section from '#lib/components/Section.svelte';
 	import YouTube from '#lib/components/YouTube.svelte';
 </script>
 
 <CaseStudy
 	slug="rounds-on-me"
+	heroPanels={[
+		{ image: heroLobby, alt: 'The Rounds On Me lobby screen', focus: '50% 40%' },
+		{ image: heroExpo, alt: 'Showing Rounds On Me at the expo', focus: '40% 40%' }
+	]}
 	subtitle="A drinking party game."
 	specs={[
 		{ label: 'Itch.io', value: 'Store page', href: 'https://bigninjachicken.itch.io/rounds-on-me' },

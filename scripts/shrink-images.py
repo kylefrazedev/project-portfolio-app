@@ -28,8 +28,6 @@ ASSETS = ROOT / "src/lib/assets"
 
 # Largest width each image is ever displayed at, x2 for HiDPI screens (see layout notes).
 CAPS = {
-    # Full-bleed hero (sizes=100vw): covers 2560px-wide displays.
-    "hero/stat-gpt.jpg": 2560,
     # Card-only images (sizes <= 600px wide; phones at 3x top out near 1300px).
     "projects/bolt.png": 1600,
     "projects/no-mind.png": 1600,
@@ -51,7 +49,6 @@ DIR_CAPS = {
 # Opaque screenshots/renders saved as PNG -> JPEG. Tiny flat graphics stay PNG.
 TO_JPEG = [
     "about/gdc-me.png",
-    "hero/action-slapstick.png",
     "projects/bolt.png",
     "projects/COPano.png",
     "projects/express-polar/cover-thin.png",
@@ -108,6 +105,8 @@ work = sorted(set(CAPS) | set(TO_JPEG) |
               {p.relative_to(ASSETS).as_posix() for d in DIR_CAPS for p in (ASSETS / d).glob("*.jpg")})
 for rel in work:
     src = ASSETS / rel
+    if not src.exists():  # already converted or removed
+        continue
     w = width_of(src)
     cap = cap_for(rel)
     new_w = min(w, cap) if cap else w

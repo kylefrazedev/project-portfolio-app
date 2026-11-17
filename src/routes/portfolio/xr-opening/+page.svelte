@@ -1,11 +1,19 @@
 <script lang="ts">
 	import CaseStudy from '#lib/components/CaseStudy.svelte';
+	import heroStage from '#lib/assets/projects/xr-opening/xr1.webp?enhanced';
+	import heroCameras from '#lib/assets/projects/xr-opening/xr2.jpg?enhanced';
+	import heroExtension from '#lib/assets/projects/xr-opening/xr5.jpg?enhanced';
 	import Section from '#lib/components/Section.svelte';
 	import YouTube from '#lib/components/YouTube.svelte';
 </script>
 
 <CaseStudy
 	slug="xr-opening"
+	heroPanels={[
+		{ image: heroStage, alt: 'On the XR stage before the show', focus: '45% 50%' },
+		{ image: heroCameras, alt: 'Cameras rolling on the XR set', focus: '50% 50%' },
+		{ image: heroExtension, alt: 'The in-camera set extension', focus: '50% 50%' }
+	]}
 	heading="McVey Data Science Building XR Opening"
 	subtitle="Bringing the opening show to life with design, new technology, and programming."
 	specs={[

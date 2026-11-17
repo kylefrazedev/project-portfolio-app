@@ -1,5 +1,8 @@
 <script lang="ts">
 	import CaseStudy from '#lib/components/CaseStudy.svelte';
+	import heroArmory from '#lib/assets/projects/pursuit-of-laughter/armory-amusement.jpg?enhanced';
+	import heroCover from '#lib/assets/projects/pursuit-of-laughter/cover.jpg?enhanced';
+	import heroTeam from '#lib/assets/projects/pursuit-of-laughter/group-pic.jpg?enhanced';
 	import Section from '#lib/components/Section.svelte';
 	import YouTube from '#lib/components/YouTube.svelte';
 	// Animated GIFs are served as-is (the image optimizer would flatten them).
@@ -9,6 +12,11 @@
 
 <CaseStudy
 	slug="pursuit-of-laughter"
+	heroPanels={[
+		{ image: heroArmory, alt: 'The Armory of Amusement', focus: '50% 45%' },
+		{ image: heroCover, alt: 'The Jester God title screen', focus: '50% 55%' },
+		{ image: heroTeam, alt: 'The Pursuit Of Laughter team', focus: '50% 55%' }
+	]}
 	subtitle="Kill for the Jester God."
 	specs={[
 		{

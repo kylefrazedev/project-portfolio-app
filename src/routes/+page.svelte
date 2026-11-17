@@ -1,151 +1,174 @@
 <script lang="ts">
-	import emblaCarouselSvelte from 'embla-carousel-svelte';
-	import type { EmblaCarouselType } from 'embla-carousel';
-	import Autoplay from 'embla-carousel-autoplay';
 	import FeatureCard from '#lib/components/FeatureCard.svelte';
+	import HeroShowcase from '#lib/components/HeroShowcase.svelte';
+	import { reveal } from '#lib/actions/reveal.ts';
 	import { featuredProjects } from '#lib/data/projects.ts';
+	import { site } from '#lib/data/site.ts';
+	import { fly } from 'svelte/transition';
 
-	import hero1 from '#lib/assets/hero/stat-gpt.jpg?enhanced';
-	import hero2 from '#lib/assets/hero/action-slapstick.jpg?enhanced';
-	import hero3 from '#lib/assets/hero/dino.jpg?enhanced';
+	// Hero backdrop: the Kodansha House reel, then photos from recent projects.
+	import ledRoom from '#lib/assets/projects/adobe-max-2024/cover.jpg?imgSizes=100vw&enhanced';
+	import rhythmGame from '#lib/assets/projects/express-polar/train-2.jpg?imgSizes=100vw&enhanced';
+	import blueLockCage from '#lib/assets/projects/kodansha-house/la/bluelock-cage.jpg?imgSizes=100vw&enhanced';
 	import nitric from '#lib/assets/logos/nitric-concepts.png?enhanced';
 	import nationwide from '#lib/assets/logos/nationwide.png?enhanced';
 	import miami from '#lib/assets/logos/miami.png?enhanced';
+	// SVG wordmark: already tiny and sharp at any size, so it skips the image optimizer.
+	import acronym from '#lib/assets/logos/acronym.svg';
 
 	const slides = [
-		{ image: hero1, eyebrow: 'Hello!', title: "I'm a programmer" },
-		{ image: hero2, title: 'Game developer' },
-		{ image: hero3, title: 'Innovator' }
+		{
+			kind: 'video' as const,
+			label: 'Kodansha House New York',
+			role: 'Creative Technologist',
+			wide: { src: '/video/hero-reel-wide.mp4', poster: '/video/hero-reel-wide.jpg' },
+			tall: { src: '/video/hero-reel-tall.mp4', poster: '/video/hero-reel-tall.jpg' }
+		},
+		{
+			kind: 'image' as const,
+			image: ledRoom,
+			label: 'Adobe MAX 2024 body-tracking LED room',
+			role: 'Programmer'
+		},
+		{
+			kind: 'image' as const,
+			image: rhythmGame,
+			label: 'Express: Polar rhythm minigame',
+			role: 'Game Developer'
+		},
+		{
+			kind: 'image' as const,
+			image: blueLockCage,
+			label: 'Kodansha House Blue Lock game',
+			role: 'Innovator'
+		}
 	];
 
 	const logos = [
+		{ src: acronym, name: 'Acronym' },
 		{ image: nitric, name: 'Nitric Concepts' },
 		{ image: nationwide, name: 'Nationwide' },
 		{ image: miami, name: 'Miami University' }
 	];
-
-	const reducedMotion =
-		typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-	const carousel = {
-		options: { loop: true },
-		plugins: reducedMotion ? [] : [Autoplay({ delay: 4000, stopOnInteraction: false })]
-	};
-
-	let embla: EmblaCarouselType | undefined = $state();
-	let selected = $state(0);
-
-	function onInit(event: CustomEvent<EmblaCarouselType>) {
-		embla = event.detail;
-		embla.on('select', () => (selected = embla!.selectedScrollSnap()));
-	}
 </script>
 
-<section class="relative px-3 pt-19" aria-roledescription="carousel" aria-label="Introduction">
-	<div class="overflow-hidden rounded-3xl" use:emblaCarouselSvelte={carousel} onemblaInit={onInit}>
-		<div class="flex">
-			{#each slides as slide, i (i)}
-				<div
-					class="relative h-[calc(100svh-6rem)] min-h-[28rem] min-w-0 flex-[0_0_100%]"
-					aria-roledescription="slide"
-					aria-label="{i + 1} of {slides.length}"
+<HeroShowcase {slides} scrollTarget="#recent-projects">
+	{#snippet headline(active)}
+		<h1
+			class="font-display text-5xl font-bold text-white sm:text-7xl lg:text-8xl"
+			aria-label={site.name}
+		>
+			<!-- Letters assemble one by one on load. -->
+			{#each site.name as letter, i (i)}
+				<span class="hero-letter" style:--i={i} aria-hidden="true"
+					>{letter === ' ' ? ' ' : letter}</span
 				>
-					<enhanced:img
-						src={slide.image}
-						alt=""
-						class="absolute inset-0 size-full object-cover"
-						sizes="100vw"
-						fetchpriority={i === 0 ? 'high' : undefined}
-						loading={i === 0 ? 'eager' : 'lazy'}
-					/>
-					<div
-						class="absolute inset-0 bg-linear-to-tr from-black via-black/60 to-transparent"
-					></div>
-					<div class="absolute inset-0 grid place-items-center px-4 text-center">
-						<div>
-							{#if slide.eyebrow}
-								<p class="font-display text-6xl font-bold text-white sm:text-8xl">
-									{slide.eyebrow}
-								</p>
-							{/if}
-							<p
-								class="mt-3 font-display text-3xl font-bold tracking-widest text-white uppercase sm:text-5xl"
-							>
-								{slide.title}
-							</p>
-						</div>
-					</div>
-				</div>
 			{/each}
-		</div>
-	</div>
-
-	<div class="absolute inset-x-0 bottom-6 flex justify-center gap-3">
-		{#each slides as slide, i (i)}
-			<button
-				type="button"
-				class="grid h-8 w-10 place-items-center"
-				onclick={() => embla?.scrollTo(i)}
-				aria-label="Show slide {i + 1}: {slide.title}"
-				aria-current={selected === i}
-			>
+		</h1>
+		<!-- The role rotates with the backdrop; the grid stacks old and new words while they swap. -->
+		<p
+			class="mt-4 grid font-display text-2xl font-bold tracking-[0.2em] text-white/90 uppercase sm:text-4xl"
+			aria-live="polite"
+		>
+			{#key active}
 				<span
-					class={[
-						'h-1 w-full rounded-full transition-colors',
-						selected === i ? 'bg-white' : 'bg-white/40'
-					]}
-				></span>
-			</button>
-		{/each}
-	</div>
-</section>
+					class="col-start-1 row-start-1"
+					in:fly={{ y: 24, duration: 600, delay: 150 }}
+					out:fly={{ y: -24, duration: 400 }}>{slides[active].role}</span
+				>
+			{/key}
+		</p>
+	{/snippet}
+</HeroShowcase>
 
 <section id="recent-projects" class="mx-auto max-w-7xl px-4 pt-24 sm:px-6 lg:px-8">
-	<h1 class="text-center text-4xl font-bold sm:text-5xl">Recent Projects</h1>
-	<div class="mt-12 grid gap-6 lg:grid-cols-2">
-		{#each featuredProjects as project, i (project.slug)}
-			<div class={[i === featuredProjects.length - 1 && i % 2 === 0 && 'lg:col-span-2']}>
-				<FeatureCard {project} />
-			</div>
-		{/each}
-	</div>
+	<h2 class="text-center text-4xl font-bold sm:text-5xl" use:reveal>Recent Projects</h2>
+	{#if featuredProjects.length}
+		<!-- Lead project gets a full-width spotlight; the rest sit in an even row of equal cards. -->
+		<div class="mt-12" use:reveal>
+			<FeatureCard project={featuredProjects[0]} />
+		</div>
+		<ul
+			class={[
+				'mt-6 grid gap-6',
+				featuredProjects.length - 1 === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'
+			]}
+		>
+			{#each featuredProjects.slice(1) as project, i (project.slug)}
+				<li use:reveal={{ delay: i * 100 }}><FeatureCard {project} variant="compact" /></li>
+			{/each}
+		</ul>
+	{/if}
 	<div class="mt-10 flex justify-center">
 		<a href="/portfolio" class="btn btn-ghost">See all projects</a>
 	</div>
 </section>
 
 <section id="about-me" class="mx-auto max-w-5xl px-4 pt-32 sm:px-6 lg:px-8">
-	<h2 class="text-center text-4xl font-bold sm:text-5xl">About Me</h2>
-	<p class="mt-2 text-center text-xl text-muted">Love games and rock climbing!</p>
+	<div use:reveal>
+		<h2 class="text-center text-4xl font-bold sm:text-5xl">About Me</h2>
+		<p class="mt-2 text-center text-xl text-muted">Love games and rock climbing!</p>
+	</div>
 
 	<div class="mt-12 flex flex-col items-center gap-10 md:flex-row">
-		<div class="space-y-4 text-lg text-muted">
+		<div class="space-y-4 text-lg text-muted" use:reveal>
 			<p>
-				I'm Frazier Kyle, passionate about games and skilled in designing immersive worlds, levels,
-				and environments. As a Developer and Designer at Nitric Concepts, I programmed interactive
-				levels and developed background systems for engaging gaming experiences, collaborating with
-				Mojang and YouTubers to create popular maps and games. I also led Miami University's Game
-				Design Club, mentoring the future of game design.
+				I'm Frazier Kyle, a Creative Technology Programmer at Acronym, building interactive
+				experiences that people walk into. I was the lead programmer on Kodansha House in Los
+				Angeles and New York: I built the Blue Lock impact-screen game, every iPad UI and the
+				takeaway systems, and ran all show control in TouchDesigner, from Dante audio to grandMA
+				lighting cues.
 			</p>
-			<p class="font-semibold text-fg">
-				I'm seeking computer science and game development opportunities.
+			<p>
+				Before that I made games: Minecraft Marketplace maps with Nitric Concepts and Mojang, Unreal
+				Engine 5 multiplayer projects, and leading Miami University's Game Design Club.
 			</p>
-			<a href="/contacts" class="mt-2 btn btn-primary">My resume</a>
 		</div>
-		<enhanced:img
-			src="#lib/assets/about/gdc-me.jpg"
-			alt="Frazier Kyle at GDC"
-			class="size-64 shrink-0 rounded-full border-4 border-primary object-cover sm:size-80"
-		/>
+		<!-- Fixed-width wrapper: the <picture> enhanced:img renders would otherwise shrink in the row. -->
+		<div class="w-64 shrink-0 sm:w-72 lg:w-80" use:reveal={{ delay: 120 }}>
+			<enhanced:img
+				src="#lib/assets/about/frazier-kyle.jpg"
+				alt="Frazier Kyle testing an interactive prop with a laptop in the workshop"
+				class="aspect-[4/5] w-full rounded-2xl border-4 border-primary object-cover"
+				sizes="(min-width: 1024px) 320px, 288px"
+			/>
+		</div>
+	</div>
+	<div class="mt-10 flex justify-center">
+		<a href="/contacts" class="btn btn-primary">My resume</a>
 	</div>
 </section>
 
 <section class="mt-24 bg-surface py-12" aria-label="Where I've worked and studied">
-	<ul class="mx-auto grid max-w-5xl items-center gap-10 px-4 sm:grid-cols-3">
-		{#each logos as logo (logo.name)}
-			<li class="flex justify-center">
-				<enhanced:img src={logo.image} alt={logo.name} class="max-h-40 w-auto" sizes="300px" />
+	<ul class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:grid-cols-2 lg:grid-cols-4">
+		{#each logos as logo, i (logo.name)}
+			<li class="flex justify-center" use:reveal={{ delay: i * 90 }}>
+				{#if logo.image}
+					<enhanced:img src={logo.image} alt={logo.name} class="max-h-40 w-auto" sizes="300px" />
+				{:else}
+					<img src={logo.src} alt={logo.name} class="h-10 w-auto max-w-full sm:h-12" />
+				{/if}
 			</li>
 		{/each}
 	</ul>
 </section>
+
+<style>
+	.hero-letter {
+		display: inline-block;
+		animation: letter-in 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+		animation-delay: calc(200ms + var(--i) * 45ms);
+	}
+	@keyframes letter-in {
+		from {
+			opacity: 0;
+			transform: translateY(0.35em) rotate(4deg);
+			filter: blur(6px);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.hero-letter {
+			animation: none;
+		}
+	}
+</style>

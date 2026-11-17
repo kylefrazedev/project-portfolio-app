@@ -42,9 +42,5 @@
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.60.1",
 		"vite": "^8.3.0"
-	},
-	"dependencies": {
-		"embla-carousel-autoplay": "^8.6.0",
-		"embla-carousel-svelte": "^8.6.0"
 	}
 }

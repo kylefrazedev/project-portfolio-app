@@ -5,7 +5,6 @@
 	const links = [
 		{ label: site.phone, href: `tel:${site.phone.replace(/\D/g, '')}`, icon: '📞' },
 		{ label: site.email, href: `mailto:${site.email}`, icon: '📨' },
-		{ label: 'GitHub', href: site.github, icon: '💾' },
 		{ label: 'LinkedIn', href: site.linkedin, icon: '🔗' }
 	];
 </script>
